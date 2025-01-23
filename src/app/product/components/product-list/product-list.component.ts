@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, inject, OnInit, signal, ViewChild, WritableSignal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
@@ -17,8 +18,10 @@ import { Product } from '../../interfaces/product';
 })
 export class ProductListComponent implements OnInit, AfterViewInit {
 
-  private productService = inject(ProductService)
+  title = 'List of Products';
 
+  private productService = inject(ProductService)
+  private router = inject(Router);
   
   products: WritableSignal<Product[]> = signal<Product[]>([]);
   
@@ -49,7 +52,9 @@ export class ProductListComponent implements OnInit, AfterViewInit {
   }
 
   navigateToForm(id?: number): void {
-    console.log('Navigate to form');
+    const path = id ? `/products/edit/${id}` : '/products/new';
+    console.log(path);
+    this.router.navigate([path]);
   }
 
   deleteProduct(id?: number): void {
