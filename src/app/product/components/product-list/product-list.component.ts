@@ -5,8 +5,9 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatIconModule } from '@angular/material/icon';
 
-import { Product } from './../../interfaces/product';
+
 import { ProductService } from '../../services/product.service';
+import { Product } from '../../interfaces/product';
 
 @Component({
   selector: 'app-product-list',
@@ -14,7 +15,7 @@ import { ProductService } from '../../services/product.service';
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.scss'
 })
-export class ProductListComponent implements OnInit {
+export class ProductListComponent implements OnInit, AfterViewInit {
 
   private productService = inject(ProductService)
 
@@ -30,6 +31,10 @@ export class ProductListComponent implements OnInit {
     this.loadProducts();
   }
 
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
+  }
+
   loadProducts() {
     this.productService.getProducts().subscribe({
       next: (products) => {
@@ -41,7 +46,6 @@ export class ProductListComponent implements OnInit {
 
   updateTableData() {
     this.dataSource.data = this.products();
-    this.dataSource.paginator = this.paginator;
   }
 
   navigateToForm(id?: number): void {
