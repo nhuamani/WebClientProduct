@@ -1,1 +1,38 @@
-<p>product-form works!</p>
+<h1 >{{ isEditMode ? 'Edit Product': 'New Product'}}</h1>
+
+<form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+    <div class="form-row">
+        <mat-form-field appearance="outline" floatLabel="always">
+            <mat-label>Name</mat-label>
+            <input matInput placeholder="Name" formControlName="name" required>
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            <mat-error *ngIf="productForm.get('name')?.invalid">Name is required (min 2 characters)</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Price</mat-label>
+            <input matInput placeholder="Price" formControlName="price" required>
+            <mat-error *ngIf="productForm.get('price')?.invalid">Price is required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Stock</mat-label>
+            <input matInput placeholder="Stock" formControlName="stock" required>
+            <mat-error *ngIf="productForm.get('stock')?.invalid">Stock is required integers</mat-error>
+        </mat-form-field>
+    </div>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Description</mat-label>
+        <textarea matInput placeholder="Description" formControlName="description" required></textarea>
+        <mat-error *ngIf="productForm.get('description')?.invalid">Description is required (max 100 characters)</mat-error>
+    </mat-form-field>
+
+
+    <div class="form-actions">
+        <button mat-flat-button type="submit" [disabled]="productForm.invalid">
+            {{ isEditMode ? 'Update Changes': 'Add Product'}}
+        </button>
+        <button mat-raised-button (click)="router.navigate(['/'])" type="button">Cancel</button>
+    </div>
+</form>
