@@ -1,1 +1,5 @@
-<p>confirmation-dialog works!</p>
+<h2 mat-dialog-title>Are you sure you want to delete this product?</h2>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close (click)="onCancel()">Cancel</button>
+  <button mat-button mat-dialog-close cdkFocusInitial (click)="onConfirm()">Delete</button>
+</mat-dialog-actions>
