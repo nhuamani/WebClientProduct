@@ -1,3 +1,19 @@
-.content {
+.main {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 1rem;
+  box-sizing: inherit;
+  position: relative;
+}
+
+.content {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: white;
 }

@@ -22,10 +22,12 @@ form {
 mat-form-field {
   width: 100%;
   padding-bottom: 1rem;
+  display: block;
 }
 
 .form-actions {
   display: flex;
   justify-content: flex-end;
   gap: 1rem;
+  margin: 0.5rem;
 }
